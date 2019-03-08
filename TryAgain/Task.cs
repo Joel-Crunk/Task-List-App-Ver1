@@ -21,6 +21,7 @@ namespace TryAgain
         {
             details = d;
             complete = c;
+
         }
 
         public string Details { get => details; set => details = value; }

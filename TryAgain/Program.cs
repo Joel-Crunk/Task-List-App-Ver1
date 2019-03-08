@@ -9,8 +9,11 @@ namespace TryAgain
 {
     class Program
     {
+        
+
         static void Main(string[] args)
         {
+            const char rs = '\x1e';
             bool menu = false;
             var path = @"C:\Users\Joel.Crunk\source\repos\TryAgain\TryAgain\Testingfile.txt";
             //var task = new List<string>();
@@ -25,12 +28,58 @@ namespace TryAgain
                 while (!sr.EndOfStream)
                 {
                     string newTask = sr.ReadLine();
-                    task.Add(new Task(newTask));
+
+                    if (newTask.Contains(rs))
+                    {
+                        task.Add(new Task(newTask, true));
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        task.Add(new Task(newTask));
+                    }
                 }
             }
             //var task = new List<Task>();
 
             Console.WriteLine($"  { task.Count} tasks in your list");
+            void PrintListAction()
+            {
+
+            }
+
+            void PrintList()
+            {
+                for (int x = 0; x < task.Count; x++)
+                {
+                    if (!task[x].Complete)
+                    {
+                        for (int i = x; i < task.Count; i++)
+                        {
+                           
+                            if (task[i].Complete)
+                            {
+
+                                string str;
+                                str = $"\n  {i + 1}. {task[i].Details}";
+                                str = str.Substring(0, str.Length - 1);
+                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                                Console.WriteLine(str);
+                                Console.ResetColor();
+                                x = task.Count + 1;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"\n  {i + 1}. {task[i].Details}\n");
+                                x = task.Count + 1;
+                            }                            
+                        }
+                        
+                    }
+                    
+                }
+            }
 
             do
             {
@@ -42,6 +91,7 @@ namespace TryAgain
 
 
                 string input = Console.ReadLine();
+
 
 
                 if (input == "0")
@@ -57,11 +107,14 @@ namespace TryAgain
 
 
                         Console.Clear();
+                        PrintList();
                         Console.Write("\n\n  Menu = 0\n  or\n  Enter new task: \n\n  ");
                         string newTask = Console.ReadLine();
+
                         if (newTask == "0")
                         {
                             menu = true;
+                            Console.Clear();
                         }
                         else
                         {
@@ -75,12 +128,9 @@ namespace TryAgain
                 }
                 else if (input == "2")
                 {
-                    //Console.Clear();
-                    for (int i = 0; i < task.Count; i++)
-                    {
-                        Console.WriteLine($"\n  {i + 1}. {task[i].Details}\n");
-
-                    }
+                    Console.Clear();
+                    PrintList();
+                    
                     //Console.WriteLine();
 
 
@@ -88,17 +138,46 @@ namespace TryAgain
                 }
                 else if (input == "3")
                 {
-                    for (int i = 0; i < task.Count; i++)
-                    {
-                        Console.WriteLine($"\n  {i + 1}. {task[i].Details}\n");
-                      
-                    }
-                    Console.WriteLine("  Which one do you want to modify?  ");
-                    var mod = int.Parse(Console.ReadLine());
+                    Console.Clear();
+                    PrintList();
 
-                    //task.FindIndex(mod < Task > string input);
-                    //Console.WriteLine(task.);
-                    task.RemoveAt(mod -1);
+                    Console.Write("  Which one do you want to modify?\n\n  ");
+                    var lin = Console.ReadLine();
+                    var mod = int.Parse(lin);
+                    if (mod <= task.Count)
+                    {
+                        //Console.Clear();
+                        Console.WriteLine($"\n  1) MARK as complete.\n");
+                        Console.WriteLine($"  2) DELETE\n");
+                        Console.Write($"  3) Return to Main Menu\n\n  ");
+                        int del = int.Parse(Console.ReadLine());
+                        if (del == 1)
+                        {
+                            task[mod - 1].Complete = true;
+                            task[mod - 1].Details += rs;
+                        }
+                        else if (del == 2)
+                        {
+                            Console.Clear();
+                            task.RemoveAt(mod - 1);
+                        }
+                        else if (del == 3)
+                        {                           
+                            Console.WriteLine("\n  Return to Main Menu:  ");
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            Console.WriteLine("\n  Invalid input! ");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("\n  Invalid input! ");
+                    }
+
+  
+                    
                     //string Replace(string oldValue, string newValue);
                     //task.
                     //for (int i = 1; i < mod; i++)
@@ -106,6 +185,31 @@ namespace TryAgain
                     //    Console.WriteLine(task[mod].Details);
                     //}
 
+
+
+                    //using (StreamReader reader = new StreamReader(path))
+                    //{
+                    //    for (int i = 1; i <= mod; ++i)
+                    //        lin = reader.ReadLine();
+                    //}
+                    //int line_number = 1;
+                    //string line = null;
+
+                    ////string linetoWrite = null;
+                    //using (StreamReader reader = new StreamReader(path))
+                    //using (StreamWriter writer = new StreamWriter(tempFile))
+                    //    while ((line = reader.ReadLine()) != null)
+                    //    {
+                    //        if (line_number == mod)
+                    //        {
+                    //            writer.WriteLine(lin);
+                    //        }
+                    //        else
+                    //        {
+                    //            writer.WriteLine(line);
+                    //        }
+                    //        line_number++;
+                    //    }
 
                 }
                
