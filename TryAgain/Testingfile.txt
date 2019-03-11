@@ -2,9 +2,9 @@ aklsf
 lkjzfdh
 hang dry
 Wash more dishes
-Wash pots
-Wash silverware
-Wash dog
+Wash pots
+Wash silverware
+Wash dog
 fold clothes
 make bed
 hang clothes
@@ -22,7 +22,7 @@ Code
 call family
 hide more code
 delete code
-google code
+google code
 delete code
 tell everyone that google code is bad
 delete code
@@ -80,3 +80,10 @@ nocks
 docks
 walks
 talks
+run
+walk
+swim
+fly
+Live
+love
+Laugh

@@ -38,35 +38,42 @@ namespace TryAgain
 
             void displayPage(int current = 1)
             {
-                int lowerLimit = 25 * (current - 1);
-                int upperLimit = ((lowerLimit + 25) > task.Count) ? task.Count : lowerLimit + 25;
-
-                for (int i = lowerLimit; i < upperLimit; i++)
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    if (task[i].Complete)
-                    {
-                        string str = $"\n  {i + 1}. {task[i].Details}";
-                        str = str.Substring(0, str.Length - 1);
+                    string newTask = sr.ReadLine();
 
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine(str);
-                        Console.ResetColor();
-                      
-                    }
-                    else 
+                    int lowerLimit = 25 * (current - 1);
+                    int upperLimit = ((lowerLimit + 25) > task.Count) ? task.Count : lowerLimit + 25;
+                    int firstLine = 1;
+                    for (int i = lowerLimit; i < upperLimit; i++)
                     {
-                        Console.Write($"\n  {i + 1}. {task[i].Details}\n");
-                      
+                        
+                        if (!task[i].Complete)
+                        {
+                            Console.Write($"\n  {i + 1}. {task[i].Details}\n");
+                            firstLine++;
+
+                        }
+                        else if (firstLine == 1)
+                        {
+                            continue;
+                        }
+                        else if (task[i].Complete)
+                        {
+                            string str = $"\n  {i + 1}. {task[i].Details}";
+                            str = str.Substring(0, str.Length - 1);
+
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.WriteLine(str);
+                            Console.ResetColor();
+                        }
                     }
                 }
             }
-
             void PrintList()
-            {
-                
+            {    
                 int currentPage = 1;
                 int numPages = (int) Math.Ceiling(task.Count / 25.0);
-
                 if (numPages <= 1)
                 {
                     displayPage();
@@ -92,100 +99,7 @@ namespace TryAgain
                             break;
                         }
                     } while (true);
-                   
                 }
-
-                //for (int x = 0; x < task.Count; x++)
-                //{
-                //    counter++;
-                    
-                    
-                //    if (!task[x].Complete)
-                //    {
-                //        int co = 0;
-                //         co = counter + 24;
-                //        for (int i = x; i < co; i++)
-                //        {
-                //            if (task[i].Complete)
-                //            {
-                //                string str;
-                //                str = $"  {i + 1}. {task[i].Details}";
-                //                str = str.Substring(0, str.Length - 1);
-                //                Console.ForegroundColor = ConsoleColor.DarkGray;
-                //                Console.WriteLine(str);
-                //                Console.ResetColor();
-                //                x = task.Count;
-                //            }
-                //            else if (!task[i].Complete)
-                //            {
-                //                Console.WriteLine($"\n  {i + 1}. {task[i].Details}\n");
-                //                x = task.Count;
-                //            }                            
-                //        }
-                //        int z = 0;
-                //        z = counter + 49;
-                //        Console.Write($"  0) EXIT\n  1) NEXT PAGE\n  ");
-                //        int put = int.Parse(Console.ReadLine());
-                //        if (put == 1)
-                //        {
-                           
-                //            for (int i = co; i < z; i++)
-                //            {
-                //                if (task[i].Complete)
-                //                {
-                //                    string str;
-                //                    str = $"\n  {i + 1}. {task[i].Details}";
-                //                    str = str.Substring(0, str.Length - 1);
-                //                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                //                    Console.WriteLine(str);
-                //                    Console.ResetColor();  
-                //                }
-                //                else
-                //                {
-                //                    Console.WriteLine($"\n  {i + 1}. {task[i].Details}\n");      
-                //                }
-                //            }
-                            
-                //        }
-                            /*
-                            int aa = z + 25;
-                            for (int i = z; i < aa; i++)
-                            {
-                                if (task[z].Complete)
-                                {
-                                    string str;
-                                    str = $"\n  {z + 1}. {task[z].Details}";
-                                    str = str.Substring(0, str.Length - 1);
-                                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                                    Console.WriteLine(str);
-                                    Console.ResetColor();                                  
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"\n  {z + 1}. {task[z].Details}\n");                                 
-                                }
-                            }
-                            int bb = aa + 25;
-                            for (int i = aa; i < bb; i++)
-                            {
-                                if (task[aa].Complete)
-                                {
-                                    string str;
-                                    str = $"\n  {aa + 1}. {task[aa].Details}";
-                                    str = str.Substring(0, str.Length - 1);
-                                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                                    Console.WriteLine(str);
-                                    Console.ResetColor();
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"\n  {aa + 1}. {task[aa].Details}\n");
-                                }
-                            }
-                            */
-                        //}
-                        //  /  
-                    //}
             }
             do
             {
