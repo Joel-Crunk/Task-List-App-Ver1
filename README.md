@@ -17,3 +17,9 @@ It
 7) it allows the option to delete task on list for whatever reason so that 
 	 the list is not filled with task that may not be relevent anymore but 
 	 not completed.
+	 
+The next step would be to make the selecton visual instead of by numbers.
+I would also make more exception handling and make it more bug proof.
+A bunch of horses is a herd, a bunch of birds is a flock, and a bunch of 
+bugs is a... swarm?(bees) colony?(termites) army?(ants) nope, it would have to be an infestation!
+
